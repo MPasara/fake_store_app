@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 import '../../../../common/domain/providers/base_router_provider.dart';
-import '../../../home/presentation/home_page.dart';
+import '../../../home/presentation/main_page.dart';
 import '../../../login/presentation/login_page.dart';
 import '../../data/repository/auth_repository.dart';
 import 'auth_state.dart';
@@ -96,7 +96,7 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
           _deepLink = null;
           return tmpDeepLink;
         }
-        return HomePage.routeName;
+        return MainPage.routeName;
       }
       return null;
     }
@@ -106,7 +106,7 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
     final loginRoutes =
         goRouterState.matchedLocation.startsWith(LoginPage.routeName);
     if (isLoggedIn && routeExists) {
-      return loginRoutes ? HomePage.routeName : null;
+      return loginRoutes ? MainPage.routeName : null;
     }
     _deepLink =
         !loginRoutes && routeExists ? goRouterState.uri.toString() : null;

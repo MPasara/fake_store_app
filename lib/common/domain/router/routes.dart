@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_little_app/features/dashboard/presentation/pages/home_page.dart';
+import 'package:my_little_app/features/dashboard/presentation/pages/mladens_page.dart';
 
 import '../../../common/domain/utils/string_extension.dart';
 import '../../../example/example_routes.dart';
-import '../../../features/dashboard/presentation/dashboard_page.dart';
 import '../../../features/directories/presentation/directories_page.dart';
-import '../../../features/home/presentation/home_page.dart';
+import '../../../features/home/presentation/main_page.dart';
 import '../../../features/login/presentation/login_page.dart';
 import '../../../features/notifications/presentation/all_notifications_page.dart';
 import '../../../features/notifications/presentation/notification_details_page.dart';
@@ -24,13 +25,14 @@ List<RouteBase> getRoutes({
 }) =>
     [
       GoRoute(
-        path: HomePage.routeName,
-        redirect: (context, state) => DashboardPage.routeName,
+        path: MainPage.routeName,
+        redirect: (context, state) => HomePage.routeName,
       ),
-      if (stateful)
+      _statefulShellRoute(rootNavigatorKey: rootNavigatorKey),
+      /*  if (stateful)
         _statefulShellRoute(rootNavigatorKey: rootNavigatorKey)
       else
-        _shellRoute(rootNavigatorKey: rootNavigatorKey),
+        _shellRoute(rootNavigatorKey: rootNavigatorKey), */
       GoRoute(
         path: LoginPage.routeName,
         builder: (context, state) => const LoginPage(),
@@ -52,13 +54,13 @@ RouteBase _statefulShellRoute({
 }) =>
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
-          HomePage(navigationShell: navigationShell),
+          MainPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: DashboardPage.routeName,
-              builder: (context, state) => const DashboardPage(),
+              path: HomePage.routeName,
+              builder: (context, state) => const HomePage(),
               routes: [
                 GoRoute(
                   path: UserDetailsPage.routeName.removeLeadingSlash,
@@ -71,8 +73,16 @@ RouteBase _statefulShellRoute({
                       state.redirectIfPathParameterValid<int>(
                     pathParameterName:
                         UserDetailsPage.pathPattern.removeLeadingColon,
-                    redirectTo: DashboardPage.routeName,
+                    redirectTo: MainPage.routeName,
                   ),
+                ),
+                GoRoute(
+                  path: MladensPage.routeName.removeLeadingSlash,
+                  parentNavigatorKey:
+                      rootNavigatorKey, // used for making bottom navigation not persist
+                  builder: (context, state) {
+                    return const MladensPage();
+                  },
                 ),
                 getExampleRoutes(rootNavigatorKey: rootNavigatorKey),
               ],
@@ -173,13 +183,13 @@ RouteBase _statefulShellRoute({
       ],
     );
 
-RouteBase _shellRoute({required GlobalKey<NavigatorState> rootNavigatorKey}) =>
+/* RouteBase _shellRoute({required GlobalKey<NavigatorState> rootNavigatorKey}) =>
     ShellRoute(
-      builder: (context, state, child) => HomePage(child: child),
+      builder: (context, state, child) => MainPage(child: child),
       routes: [
         GoRoute(
-          path: DashboardPage.routeName,
-          builder: (context, state) => const DashboardPage(),
+          path: MainPage.routeName,
+          builder: (context, state) => MainPage(),
           routes: [
             GoRoute(
               path: UserDetailsPage.routeName.removeLeadingSlash,
@@ -192,7 +202,7 @@ RouteBase _shellRoute({required GlobalKey<NavigatorState> rootNavigatorKey}) =>
                   state.redirectIfPathParameterValid<int>(
                 pathParameterName:
                     UserDetailsPage.pathPattern.removeLeadingColon,
-                redirectTo: DashboardPage.routeName,
+                redirectTo: MainPage.routeName,
               ),
             ),
           ],
@@ -275,7 +285,7 @@ RouteBase _shellRoute({required GlobalKey<NavigatorState> rootNavigatorKey}) =>
           ],
         ),
       ],
-    );
+    ); */
 
 GoRoute _buildRoutesRecursively({
   required int depth,

@@ -1,5 +1,6 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,13 +10,13 @@ import '../../auth/domain/notifiers/auth_notifier.dart';
 import '../../auth/domain/notifiers/auth_state.dart';
 import '../domain/entity/bottom_navigation_item.dart';
 
-class HomePage extends ConsumerWidget {
+class MainPage extends ConsumerWidget {
   static const routeName = '/';
 
   final StatefulNavigationShell? navigationShell;
   final Widget? child;
 
-  const HomePage({super.key, this.navigationShell, this.child})
+  const MainPage({super.key, this.navigationShell, this.child})
       : assert(navigationShell != null || child != null);
 
   @override
@@ -39,7 +40,10 @@ class HomePage extends ConsumerWidget {
                 : BottomNavigationItem.getIndexForLocation(
                     ref.read(baseRouterProvider).currentLocationUri.path,
                   ),
-            onTap: (value) => _onItemTapped(ref: ref, index: value),
+            onTap: (index) {
+              _onItemTapped(ref: ref, index: index);
+              HapticFeedback.selectionClick();
+            },
           ),
         ),
       _ => const Scaffold(body: SizedBox()),

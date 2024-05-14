@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/domain/router/navigation_extensions.dart';
 import '../../../common/presentation/build_context_extensions.dart';
 import '../../../common/presentation/spacing.dart';
-import '../../dashboard/presentation/dashboard_page.dart';
+import '../../dashboard/presentation/pages/home_page.dart';
 import 'all_notifications_page.dart';
 import 'notification_details_page.dart';
 
@@ -25,7 +25,7 @@ class NotificationsPage extends ConsumerWidget {
         ),
         spacing16,
         TextButton(
-          onPressed: () => ref.pushNamed(DashboardPage.routeName),
+          onPressed: () => ref.pushNamed(HomePage.routeName),
           child: Text(
             'Go to dashboard',
             style: context.appTextStyles.regular,

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/auth/domain/notifiers/auth_notifier.dart';
-import '../../../features/home/presentation/home_page.dart';
+import '../../../features/home/presentation/main_page.dart';
 import '../router/base_router.dart';
 import '../router/go_router_router.dart';
 import '../router/routes.dart';
@@ -18,7 +18,7 @@ final baseRouterProvider = Provider<BaseRouter>((ref) {
   final goRouter = GoRouter(
     debugLogDiagnostics: kDebugMode,
     navigatorKey: _rootNavigatorKey,
-    initialLocation: HomePage.routeName,
+    initialLocation: MainPage.routeName,
     routes: getRoutes(rootNavigatorKey: _rootNavigatorKey, stateful: true),
     refreshListenable: authNotifier,
     redirect: (context, state) => authNotifier.redirect(

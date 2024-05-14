@@ -2,7 +2,7 @@
 // ignore_for_file: avoid-dynamic
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/home/presentation/home_page.dart';
+import '../../../features/home/presentation/main_page.dart';
 import '../providers/base_router_provider.dart';
 import '../providers/global_navigation_provider.dart';
 import '../utils/string_extension.dart';
@@ -25,7 +25,7 @@ extension NavigationExtensions on WidgetRef {
     final location = read(baseRouterProvider).currentLocationUri;
     final currentRoute = location.path;
     return (
-      currentRouteName: currentRoute == HomePage.routeName ? '' : currentRoute,
+      currentRouteName: currentRoute == MainPage.routeName ? '' : currentRoute,
       queryParameters: location.queryParameters
     );
   }
