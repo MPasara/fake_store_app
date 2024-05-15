@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_little_app/generated/l10n.dart';
 
 class WelcomeTextWidget extends StatelessWidget {
   const WelcomeTextWidget({
@@ -7,21 +8,21 @@ class WelcomeTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(left: 20),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Welcome back!',
-            style: TextStyle(
+            S.of(context).welcomeBack,
+            style: const TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 24,
             ),
           ),
           Text(
-            'Sign in',
-            style: TextStyle(
+            S.of(context).signIn,
+            style: const TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 24,
             ),

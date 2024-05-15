@@ -10,7 +10,7 @@ final class GenericErrorResolver implements ErrorResolver {
 
   @override
   Failure resolve<T>(Object err, [StackTrace? stackTrace]) {
-    final message = err is String ? err : S.current.unknown_error_occurred;
+    final message = err is String ? err : S.current.unknownErrorOccurred;
     return Failure.generic(
       title: failureTitle ?? message,
       error: err,

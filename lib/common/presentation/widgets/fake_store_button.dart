@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 class FakeStoreButton extends StatelessWidget {
   final Function() onPressed;
-  const FakeStoreButton({super.key, required this.onPressed});
+  final Widget? child;
+  const FakeStoreButton({
+    super.key,
+    required this.onPressed,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +19,9 @@ class FakeStoreButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 16),
-        child: Text(
-          'Sign in',
-          style: TextStyle(color: Colors.white),
-        ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: child,
       ),
     );
   }

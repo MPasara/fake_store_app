@@ -27,11 +27,13 @@ class FakeStoreTextField extends StatefulWidget {
   factory FakeStoreTextField.password({
     required String fieldName,
     required String hintText,
+    FormFieldValidator<String>? validator,
     EdgeInsetsGeometry? padding,
   }) =>
       FakeStoreTextField._(
         hint: hintText,
         fieldName: fieldName,
+        validator: validator,
         isPassword: true,
         padding: padding,
       );
@@ -39,11 +41,13 @@ class FakeStoreTextField extends StatefulWidget {
   factory FakeStoreTextField.email({
     required String fieldName,
     required String hintText,
+    FormFieldValidator<String>? validator,
     EdgeInsetsGeometry? padding,
   }) =>
       FakeStoreTextField._(
         hint: hintText,
         fieldName: fieldName,
+        validator: validator,
         padding: padding,
         keyboardType: TextInputType.emailAddress,
       );
@@ -65,6 +69,7 @@ class _FakeStoreTextFieldState extends State<FakeStoreTextField> {
     return Padding(
       padding: widget.padding ?? EdgeInsets.zero,
       child: FormBuilderTextField(
+        validator: widget.validator,
         name: widget.fieldName,
         obscureText: isHidden,
         keyboardType: widget.keyboardType,
@@ -100,6 +105,15 @@ class _FakeStoreTextFieldState extends State<FakeStoreTextField> {
             ),
           ),
           errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
               width: 1,

@@ -22,9 +22,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "permission_denied": MessageLookupByLibrary.simpleMessage(
+        "continueWithApple":
+            MessageLookupByLibrary.simpleMessage("Continue with Apple"),
+        "continueWithFacebook":
+            MessageLookupByLibrary.simpleMessage("Continue with Facebook"),
+        "continueWithGoogle":
+            MessageLookupByLibrary.simpleMessage("Continue with Google"),
+        "dontHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account? "),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "or": MessageLookupByLibrary.simpleMessage("OR"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "permissionDenied": MessageLookupByLibrary.simpleMessage(
             "Permission has been denied, please enable it in device settings"),
-        "unknown_error_occurred":
-            MessageLookupByLibrary.simpleMessage("Unknown error occurred")
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign up."),
+        "unknownErrorOccurred":
+            MessageLookupByLibrary.simpleMessage("Unknown error occurred"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }

@@ -51,20 +51,130 @@ class S {
   }
 
   /// `Unknown error occurred`
-  String get unknown_error_occurred {
+  String get unknownErrorOccurred {
     return Intl.message(
       'Unknown error occurred',
-      name: 'unknown_error_occurred',
+      name: 'unknownErrorOccurred',
       desc: '',
       args: [],
     );
   }
 
   /// `Permission has been denied, please enable it in device settings`
-  String get permission_denied {
+  String get permissionDenied {
     return Intl.message(
       'Permission has been denied, please enable it in device settings',
-      name: 'permission_denied',
+      name: 'permissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get signIn {
+    return Intl.message(
+      'Sign in',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Facebook`
+  String get continueWithFacebook {
+    return Intl.message(
+      'Continue with Facebook',
+      name: 'continueWithFacebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Google`
+  String get continueWithGoogle {
+    return Intl.message(
+      'Continue with Google',
+      name: 'continueWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Apple`
+  String get continueWithApple {
+    return Intl.message(
+      'Continue with Apple',
+      name: 'continueWithApple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OR`
+  String get or {
+    return Intl.message(
+      'OR',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account? `
+  String get dontHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account? ',
+      name: 'dontHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up.`
+  String get signUp {
+    return Intl.message(
+      'Sign up.',
+      name: 'signUp',
       desc: '',
       args: [],
     );
