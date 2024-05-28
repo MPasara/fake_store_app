@@ -1,8 +1,8 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_little_app/common/presentation/build_context_extensions.dart';
 
 import '../../../common/domain/providers/base_router_provider.dart';
 import '../../../common/domain/router/navigation_extensions.dart';
@@ -27,10 +27,15 @@ class MainPage extends ConsumerWidget {
           body: navigationShell ?? child,
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
+            backgroundColor: context.appColors.background,
+            selectedItemColor: context.appColors.defaultColor,
+            unselectedItemColor: context.appColors.secondary,
+            enableFeedback: true,
             items: BottomNavigationItem.values
                 .map(
                   (e) => BottomNavigationBarItem(
                     icon: Icon(e.icon),
+                    backgroundColor: context.appColors.appButtonTextColor,
                     label: e.title,
                   ),
                 )
@@ -42,7 +47,6 @@ class MainPage extends ConsumerWidget {
                   ),
             onTap: (index) {
               _onItemTapped(ref: ref, index: index);
-              HapticFeedback.selectionClick();
             },
           ),
         ),
