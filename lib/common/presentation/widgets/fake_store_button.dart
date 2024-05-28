@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_little_app/theme/app_colors.dart';
 
 class FakeStoreButton extends StatelessWidget {
   final Function() onPressed;
@@ -11,9 +12,11 @@ class FakeStoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).extension<AppColors>()!;
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.black),
+        backgroundColor:
+            MaterialStateProperty.all(themeColors.appButtonBackground),
         minimumSize: MaterialStateProperty.all(
           Size(MediaQuery.sizeOf(context).width * 0.75, 40),
         ),

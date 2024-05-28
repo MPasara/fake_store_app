@@ -4,19 +4,27 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 
+//light mode
 final primaryTheme = _getTheme(
   appColors: const AppColors(
     defaultColor: Color(0xFF2196F3),
     secondary: Color(0xFF000000),
-    background: Color(0xFFFFFFFF),
+    background: Colors.white,
+    textFieldBorder: Colors.black,
+    appButtonBackground: Colors.black,
+    appButtonTextColor: Colors.white,
   ),
 );
 
+//dark mode
 final secondaryTheme = _getTheme(
   appColors: const AppColors(
     defaultColor: Color(0xFFFF9800),
     secondary: Color(0xFFFFFFFF),
     background: Color(0xFF000000),
+    textFieldBorder: Colors.white,
+    appButtonBackground: Colors.white,
+    appButtonTextColor: Colors.black,
   ),
 );
 

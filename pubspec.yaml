@@ -38,6 +38,7 @@ dependencies:
       url: https://oauth2:glpat-ZzPwb9jEhQzH8ZRubL8E@gitlab.qagency.io/flutter/reusable-widget-generator.git
       ref: master
   sentry_flutter: ^7.16.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   build_runner: ^2.4.8

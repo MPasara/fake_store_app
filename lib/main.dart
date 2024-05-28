@@ -7,6 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
+import 'package:my_little_app/common/domain/providers/app_theme_notifier.dart';
+import 'package:my_little_app/theme/theme.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'common/domain/providers/base_router_provider.dart';
@@ -15,7 +17,6 @@ import 'common/utils/custom_provider_observer.dart';
 import 'common/utils/q_logger.dart';
 import 'generated/l10n.dart';
 import 'main/app_environment.dart';
-import 'theme/theme.dart';
 
 Future<void> mainCommon(AppEnvironment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +59,8 @@ class AppStartupWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final darkMode = ref.watch(appThemeNotifierProvider);
+
     final appStartupState = ref.watch(_appStartupProvider);
     return appStartupState.when(
       loading: () => const SizedBox(),
@@ -71,8 +74,12 @@ class AppStartupWidget extends ConsumerWidget {
               EnvInfo.environment != AppEnvironment.PROD,
           title: EnvInfo.appTitle,
           theme: primaryTheme,
-          //darkTheme: secondaryTheme,
-          //themeMode: ThemeMode.system,
+          //TODO: research why does app break when below code is used.
+          /* theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ), */
+          darkTheme: secondaryTheme,
+          themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
           localizationsDelegates: const [
             S.delegate,
             ...GlobalMaterialLocalizations.delegates,

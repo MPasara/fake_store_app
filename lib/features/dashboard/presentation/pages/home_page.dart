@@ -1,6 +1,7 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_little_app/common/domain/providers/app_theme_notifier.dart';
 import 'package:my_little_app/features/dashboard/presentation/pages/mladens_page.dart';
 
 import '../../../../common/domain/providers/base_router_provider.dart';
@@ -21,6 +22,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(appThemeNotifierProvider);
     return ListView(
       children: [
         Text(
@@ -85,6 +87,12 @@ class HomePage extends ConsumerWidget {
             );
           },
           child: const Text('Mladens page'),
+        ),
+        Switch(
+          value: isDarkMode,
+          onChanged: (_) {
+            ref.read(appThemeNotifierProvider.notifier).toggleDarkMode();
+          },
         ),
       ],
     );

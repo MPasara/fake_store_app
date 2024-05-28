@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_little_app/common/presentation/spacing.dart';
+import 'package:my_little_app/theme/app_colors.dart';
 
 class SocialSignInButton extends StatelessWidget {
   final String buttonText;
@@ -14,6 +15,7 @@ class SocialSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).extension<AppColors>()!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: InkWell(
@@ -28,7 +30,7 @@ class SocialSignInButton extends StatelessWidget {
               Radius.circular(20),
             ),
             border: Border.all(
-              color: Colors.black.withOpacity(0.6),
+              color: themeColors.secondary!.withOpacity(0.6),
             ),
           ),
           child: Row(
@@ -36,7 +38,10 @@ class SocialSignInButton extends StatelessWidget {
             children: [
               leadingIcon,
               spacing8,
-              Text(buttonText),
+              Text(
+                buttonText,
+                style: TextStyle(color: themeColors.appButtonBackground),
+              ),
             ],
           ),
         ),

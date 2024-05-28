@@ -17,6 +17,7 @@ import 'package:my_little_app/features/login/presentation/widgets/welcome_text_w
 import 'package:my_little_app/features/register/presentation/register_page.dart';
 import 'package:my_little_app/features/reset_password/presentation/reset_password_page.dart';
 import 'package:my_little_app/generated/l10n.dart';
+import 'package:my_little_app/theme/app_colors.dart';
 
 import '../../../common/domain/router/navigation_extensions.dart';
 import '../../../common/presentation/spacing.dart';
@@ -32,8 +33,10 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+
   @override
   Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).extension<AppColors>()!;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -49,7 +52,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   FakeStoreTextField.email(
                     hintText: S.of(context).email,
                     fieldName: 'tfEmail',
-                    validator: FormBuilderValidators.required(),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                      FormBuilderValidators.email(),
+                    ]),
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 20,
@@ -67,13 +73,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
+                        InkWell(
                           onTap: () => ref.pushNamed(
                             '${LoginPage.routeName}${ResetPasswordPage.routeName}',
                           ),
-                          child: Text(
-                            S.of(context).forgotPassword,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          customBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              S.of(context).forgotPassword,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: themeColors.textFieldBorder,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -88,7 +103,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         FakeStoreButton(
                           child: Text(
                             S.of(context).signIn,
-                            style: const TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: themeColors.appButtonTextColor,
+                            ),
                           ),
                           onPressed: () {
                             final currentState = _formKey.currentState;
@@ -101,18 +118,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   .read(authNotifierProvider.notifier)
                                   .login(email: 'email', password: 'password');
                             }
-                            /*  ref
-                                .read(authNotifierProvider.notifier)
-                                .login(email: 'email', password: 'password'); */
                           },
                         ),
                         spacing16,
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: Divider(
                                 thickness: 0.1,
-                                color: Colors.black,
+                                color: themeColors.secondary,
                               ),
                             ),
                             spacing8,
@@ -121,10 +135,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               style: const TextStyle(color: Colors.grey),
                             ),
                             spacing8,
-                            const Expanded(
+                            Expanded(
                               child: Divider(
                                 thickness: 0.1,
-                                color: Colors.black,
+                                color: themeColors.secondary,
                               ),
                             ),
                           ],
@@ -151,6 +165,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             buttonText: S.of(context).continueWithApple,
                             leadingIcon: SvgPicture.asset(
                               SvgAssets.appleLogo,
+                              colorFilter: ColorFilter.mode(
+                                themeColors.secondary ?? Colors.black,
+                                BlendMode.srcIn,
+                              ),
                             ),
                             onTap: () {},
                           ),
@@ -160,7 +178,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             children: [
                               TextSpan(
                                 text: S.of(context).dontHaveAnAccount,
-                                style: DefaultTextStyle.of(context).style,
+                                style: TextStyle(color: themeColors.secondary),
                               ),
                               TextSpan(
                                 text: S.of(context).signUp,
@@ -168,8 +186,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   ..onTap = () => ref.pushNamed(
                                         '${LoginPage.routeName}${RegisterPage.routeName}',
                                       ),
-                                style: DefaultTextStyle.of(context)
-                                    .style
+                                style: TextStyle(color: themeColors.secondary)
                                     .copyWith(fontWeight: FontWeight.w700),
                               ),
                             ],

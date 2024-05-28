@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_little_app/common/presentation/build_context_extensions.dart';
 import 'package:my_little_app/common/presentation/svg_assets.dart';
 
 class FakeStoreTextField extends StatefulWidget {
@@ -73,52 +74,61 @@ class _FakeStoreTextFieldState extends State<FakeStoreTextField> {
         name: widget.fieldName,
         obscureText: isHidden,
         keyboardType: widget.keyboardType,
-        cursorColor: Colors.black,
+        cursorColor: context.appColors.secondary,
+        style: TextStyle(color: context.appColors.secondary),
         decoration: InputDecoration(
           suffixIcon: widget.isPassword
               ? InkWell(
                   borderRadius: BorderRadius.circular(40),
                   onTap: () => _toggleTextVisibility(),
                   child: SvgPicture.asset(
+                    colorFilter: ColorFilter.mode(
+                      context.appColors.secondary ?? Colors.pink,
+                      BlendMode.srcIn,
+                    ),
                     isHidden ? SvgAssets.eyeClosed : SvgAssets.eyeOpened,
                     fit: BoxFit.scaleDown,
                   ),
                 )
               : null,
           hintText: widget.hint,
-          labelStyle: const TextStyle(
-            color: Colors.black,
+          hintStyle: TextStyle(
+            color: context.appColors.secondary,
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.all(
+          labelStyle: TextStyle(
+            color: context.appColors.secondary,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: context.appColors.textFieldBorder ?? Colors.pink),
+            borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
           ),
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.black,
+              color: context.appColors.textFieldBorder ?? Colors.pink,
               width: 1,
             ),
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
           ),
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
-              width: 1,
+              width: 0.9,
             ),
             borderRadius: BorderRadius.all(
               Radius.circular(15),
             ),
           ),
-          focusedErrorBorder: const OutlineInputBorder(
+          focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.red,
-              width: 1,
+              color: Colors.red.shade600,
+              width: 1.5,
             ),
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
           ),
