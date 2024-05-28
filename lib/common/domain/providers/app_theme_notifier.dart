@@ -11,7 +11,7 @@ class AppThemeNotifier extends Notifier<bool> {
   @override
   bool build() {
     _init();
-    return false; //false beacause we want light mode at first
+    return false;
   }
 
   void toggleDarkMode() {
